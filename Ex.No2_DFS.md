@@ -77,7 +77,7 @@ To write a python program to implement Depth first Search.
 
 
 ### Output:
-
+![image](https://github.com/kaviyabalaji/AI_Lab_2023-24/blob/main/ai%20exp%202.png)
 
 
 ### Result:
