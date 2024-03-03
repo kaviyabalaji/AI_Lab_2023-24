@@ -1,6 +1,6 @@
 # Ex.No: 4   Implementation of Alpha Beta Pruning 
 ### DATE:                                                                            
-### REGISTER NUMBER : 
+### REGISTER NUMBER : 212221040079
 ### AIM: 
 Write a Alpha beta pruning algorithm to find the optimal value of MAX Player from the given graph.
 ### Steps:
@@ -57,7 +57,7 @@ if __name__ == "__main__":
 
 ### Output:
 
-
+![image](https://github.com/kaviyabalaji/AI_Lab_2023-24/blob/main/Screenshot%202024-03-03%20194844.png)
 
 ### Result:
 Thus the best score of max player was found using Alpha Beta Pruning.
