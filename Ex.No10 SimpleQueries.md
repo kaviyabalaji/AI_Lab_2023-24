@@ -31,6 +31,7 @@ alive(bill).
 ```
 
 ### Output:
+![image](https://github.com/kaviyabalaji/AI_Lab_2023-24/blob/main/1.png)
 
 ### Task 2:
 Consider the following facts and represent them in predicate form: <br>              
