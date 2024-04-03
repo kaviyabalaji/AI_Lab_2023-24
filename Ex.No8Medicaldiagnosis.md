@@ -58,7 +58,7 @@ symptom(raju,sore_throat).
 
 ### Output:
 
-
+![image](ai8.png)
 
 ### Result:
 Thus the simple medical diagnosis system was built sucessfully.
