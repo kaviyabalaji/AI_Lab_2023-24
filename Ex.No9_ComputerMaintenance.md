@@ -50,7 +50,7 @@ problem(blank_display).
 
 
 ### Output:
-
+![image](ai9.png)
 
 
 ### Result:
