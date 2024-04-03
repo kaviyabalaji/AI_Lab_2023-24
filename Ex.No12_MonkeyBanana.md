@@ -90,7 +90,7 @@ Step 7: Stop the program.<br>
 ```
 
 ### Output/Plan:
-
+![image](ai12.png)
 
 
 ### Result:
