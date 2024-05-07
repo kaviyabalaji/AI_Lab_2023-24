@@ -1,16 +1,18 @@
-# Ex.No: 10 Learning – Use Supervised Learning  
-### DATE:                                                                            
+# Ex.No: 13 Learning – Use Supervised Learning  
+### DATE: 22.04.2024                                                                       
 ### REGISTER NUMBER : 212221040079
 ### AIM: 
 To write a program to train the classifier for Diabetes .
 ###  Algorithm:
 Step 1: Import packages 
-Step 2: Get the data 
+Step 2: Get the data
 Step 3: Split the data 
 Step 4: Scale the data 
 Step 5: Instantiate model 
-Step 6: Create a function for gradio 
+Step 6: Create a function for gradio
 Step 7: Print Result
+
+
 ### Program:
 ```
 import numpy as np
@@ -55,7 +57,25 @@ app = gr.Interface(fn=diabetes, inputs=['number','number','number','number','num
 app.launch(share=True)
 ```
 
+
+
 ### Output:
+## 1.Dataset
+
+![image](https://github.com/SandeepaNagaraj/AI_Lab_2023-24/assets/113017853/05887a4c-0fb7-4e5d-8d7a-b5fa800143f7)
+
+## 2.Accuracy
+
+![image](https://github.com/SandeepaNagaraj/AI_Lab_2023-24/assets/113017853/431761f2-3b1c-4b9c-81aa-1ec8ad6a3ab6)
+
+## 3.Output
+
+![image](https://github.com/SandeepaNagaraj/AI_Lab_2023-24/assets/113017853/d2eff3be-b1dd-44eb-93b9-b6f397130a5e)
+
+
+
+
+
 
 
 ### Result:
