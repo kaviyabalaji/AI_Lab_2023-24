@@ -2,77 +2,59 @@
 ### DATE: 22.04.2024                                                                       
 ### REGISTER NUMBER : 212221040079
 ### AIM: 
-To write a program to train the classifier for Diabetes .
+To write a program to train the classifier for reccommendation system thta recommends books based on user ratings.
 ###  Algorithm:
-Step 1: Import packages 
-Step 2: Get the data
-Step 3: Split the data 
-Step 4: Scale the data 
-Step 5: Instantiate model 
-Step 6: Create a function for gradio
-Step 7: Print Result
+1.Load data, create user-item matrix, calculate user similarity using cosine similarity.
+2.Predict ratings for target user based on similar user ratings.
+3.Filter out rated books, select top N recommendations with highest predicted ratings
 
 
 ### Program:
 ```
-import numpy as np
+# Import necessary libraries
 import pandas as pd
-pip install gradio
-pip install typing-extensions --upgrade
-pip install --upgrade typing
-pip install typing-extensions --upgrade
-import gradio as gr
-data = pd.read_csv('/content/diabetes.csv')
-data.head()
-print(data.columns)
-x = data.drop(['Outcome'], axis=1)
-y = data['Outcome']
-print(x[:5])
-#split data
-from sklearn.model_selection import train_test_split
+from sklearn.metrics.pairwise import cosine_similarity
 
-x_train, x_test, y_train, y_test= train_test_split(x,y)
+# Load a small subset of the dataset
+ratings = pd.read_csv('https://raw.githubusercontent.com/zygmuntz/goodbooks-10k/master/samples/ratings.csv')
+books = pd.read_csv('https://raw.githubusercontent.com/zygmuntz/goodbooks-10k/master/samples/books.csv')
 
-from sklearn.preprocessing import StandardScaler
-scaler = StandardScaler()
-x_train_scaled = scaler.fit_transform(x_train)
-x_test_scaled = scaler.fit_transform(x_test)
+# Data preprocessing
+# For simplicity, we'll keep only the relevant columns
+ratings = ratings[['user_id', 'book_id', 'rating']]
 
-from sklearn.neural_network import MLPClassifier
-model = MLPClassifier(max_iter=1000, alpha=1)
-model.fit(x_train, y_train)
-print("Model Accuracy on training set:", model.score(x_train, y_train))
-print("Model Accuracy on Test Set:", model.score(x_test, y_test))
+# Implement Collaborative Filtering
+# Create user-item matrix
+user_item_matrix = ratings.pivot_table(index='user_id', columns='book_id', values='rating').fillna(0)
 
-def diabetes(Pregnancies, Glucose, Blood_Pressure, SkinThickness, Insulin, BMI,Diabetes_Pedigree, Age):
-    x = np.array([Pregnancies,Glucose,Blood_Pressure,SkinThickness,Insulin,BMI,Diabetes_Pedigree,Age])
-    prediction = model.predict(x.reshape(1, -1))
-    if(prediction==0):
-      return "NO"
-    else:
-      return "YES"
+# Calculate user similarity using cosine similarity
+user_similarity = cosine_similarity(user_item_matrix)
 
-outputs = gr.Textbox()
-app = gr.Interface(fn=diabetes, inputs=['number','number','number','number','number','number','number','number'], outputs=outputs,description="Detection of Diabeties")
-app.launch(share=True)
+# Generate recommendations for a target user (e.g., user with ID 1)
+target_user_id = 1
+similarities = user_similarity[target_user_id - 1]
+predicted_ratings = similarities.dot(user_item_matrix.values) / similarities.sum()
+
+# Convert predicted ratings into DataFrame
+recommendations = pd.DataFrame(predicted_ratings.reshape(1, -1), columns=user_item_matrix.columns)
+
+# Filter out books that the user has already rated
+already_rated = ratings[ratings['user_id'] == target_user_id]['book_id']
+recommendations = recommendations.drop(already_rated, axis=1)
+
+# Get top N recommendations
+top_n = 5
+top_recommendations = recommendations.iloc[0].nlargest(top_n)
+
+# Print top recommendations
+print("Top {} Recommendations for User {}: \n".format(top_n, target_user_id))
+for book_id, predicted_rating in top_recommendations.items():
+    book_title = books.loc[books['book_id'] == book_id, 'title'].iloc[0]
+    print("Book ID: {}, Title: {}, Predicted Rating: {:.2f}".format(book_id, book_title, predicted_rating))
 ```
 
 
-
 ### Output:
-## 1.Dataset
-
-![image](https://github.com/SandeepaNagaraj/AI_Lab_2023-24/assets/113017853/05887a4c-0fb7-4e5d-8d7a-b5fa800143f7)
-
-## 2.Accuracy
-
-![image](https://github.com/SandeepaNagaraj/AI_Lab_2023-24/assets/113017853/431761f2-3b1c-4b9c-81aa-1ec8ad6a3ab6)
-
-## 3.Output
-
-![image](https://github.com/SandeepaNagaraj/AI_Lab_2023-24/assets/113017853/d2eff3be-b1dd-44eb-93b9-b6f397130a5e)
-
-
 
 
 
