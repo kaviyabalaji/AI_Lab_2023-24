@@ -55,7 +55,7 @@ for book_id, predicted_rating in top_recommendations.items():
 
 
 ### Output:
-
+[image]!(https://github.com/kaviyabalaji/AI_Lab_2023-24/blob/main/ai.png)
 
 
 
